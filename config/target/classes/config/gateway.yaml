@@ -1,0 +1,31 @@
+server:
+  port: 12345
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: test-service-route
+          uri: lb://TEST-SERVICE
+          predicates:
+            - Path=/test-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: test-service-1-route
+          uri: lb://TEST-SERVICE-1
+          predicates:
+            - Path=/test-service-1/**
+          filters:
+            - StripPrefix=1
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG

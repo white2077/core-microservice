@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG-SERVER
+      profile: dev
+      name: test-service-1, global
+      username: admin
+      password: secret
+      label: master
